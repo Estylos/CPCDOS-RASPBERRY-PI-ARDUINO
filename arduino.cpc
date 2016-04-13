@@ -1,0 +1,18 @@
+REM/ CPCDOS, RASPBERRY PI, ARDUINO par Esteban Cadic le 06/04/2016
+REM/ Partie : CPCDOS : CpcdosC+ 
+
+cls/
+Txt/ Selectionnez un composant [leds/lcd] /#R
+fix/ /q comp
+REM/ on récupère ce que l'utilisateur a entré 
+
+SI/ "%comp%" = "leds" alors:
+	exe/ leds.cpc
+Fin/ si
+
+SI/ "%comp%" = "lcd" alors:
+	exe/ lcd.cpc
+Sinon:
+	txt/
+	Txt/ Mauvais composant...
+Fin/ si

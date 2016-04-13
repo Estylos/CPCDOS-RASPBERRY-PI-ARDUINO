@@ -1,0 +1,43 @@
+REM/ CPCDOS, RASPBERRY PI, ARDUINO par Esteban Cadic le 06/04/2016
+REM/ Partie : CPCDOS : CpcdosC+ 
+
+fix/ ip = 192.168.1.60
+REM/ l'ip de mon Raspberry Pi
+
+Txt/
+Txt/ Selectionnez une fonction [texte/effacer] /#R
+fix/ /q fonc
+REM/ on récupère ce que l'utilisateur a entré 
+
+SI/ "%fonc%" = "texte" alors:
+	Txt/	
+	Txt/ Que voulez-vous ecrire sur la 1ere ligne ? /#R
+	fix/ /q txt1
+	REM/ on récupère ce que l'utilisateur a entré 
+	telecharger/ http://%ip%/lcd.php?fonction=effacer
+	REM/ on télécharge une page PHP avec 1 argument (fonction : effacer)
+	REM/ on efface l'écran LCD	
+	telecharger/ http://%ip%/lcd.php?fonction=texte&texte=%txt1%
+	REM/ on télécharge une page PHP avec 2 arguments (fonction : texte, texte : variable txt1)	
+	Txt/
+	Txt/ Et sur la 2eme ? /#R
+	fix/ /q txt2
+	REM/ on récupère ce que l'utilisateur a entré 
+	telecharger/ http://%ip%/lcd.php?fonction=ligne2
+	REM/ on télécharge une page PHP avec 1 argument (fonction : ligne2)	
+	telecharger/ http://%ip%/lcd.php?fonction=texte&texte=%txt2%
+	REM/ on télécharge une page PHP avec 2 arguments (fonction : texte, texte : variable txt2)	
+	aller/ FIN
+Fin/ si
+SI/ "%fonc%" = "effacer" alors:
+	telecharger/ http://%ip%/lcd.php?fonction=effacer
+	REM/ on télécharge une page PHP avec 1 argument (fonction : effacer)
+	aller/ FIN	
+Sinon:
+	Txt/
+	Txt/ Mauvaise fonction...
+Fin/ si
+
+:FIN:
+REM/ Fin du programme
+txt/

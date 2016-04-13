@@ -1,0 +1,80 @@
+REM/ CPCDOS, RASPBERRY PI, ARDUINO par Esteban Cadic le 06/04/2016
+REM/ Partie : CPCDOS : CpcdosC+ 
+
+fix/ ip = 192.168.1.60
+REM/ l'ip de mon Raspberry Pi
+
+Txt/
+Txt/ Selectionnez une led [bleu/blanc/rouge] /#R
+fix/ /q led
+REM/ on récupère ce que l'utilisateur a entré 
+
+SI/ "%led%" = "bleu" alors:
+	Txt/	
+	Txt/ Selectionnez un etat [on/off] /#R
+	fix/ /q etat
+	REM/ on récupère ce que l'utilisateur a entré 	
+	SI/ "%etat%" = "on" alors:
+		telecharger/ http://%ip%/led.php?couleur=bleu&etat=on
+		REM/ on télécharge une page PHP avec 2 arguments (couleur : bleu, etat : on)		
+		aller/ FIN
+	Fin/ si	
+	SI/ "%etat%" = "off" alors:
+		telecharger/ http://%ip%/led.php?couleur=bleu&etat=off
+		REM/ on télécharge une page PHP avec 2 arguments (couleur : bleu, etat : off)		
+		aller/ FIN
+	Sinon:
+		Txt/
+		Txt/ Mauvais etat...
+		aller/ FIN
+	Fin/ si	
+Fin/ si
+
+SI/ "%led%" = "blanc" alors:
+	Txt/	
+	Txt/ Selectionnez un etat [on/off] /#R
+	fix/ /q etat
+	REM/ on récupère ce que l'utilisateur a entré 	
+	SI/ "%etat%" = "on" alors:
+		telecharger/ http://%ip%/led.php?couleur=blanc&etat=on
+		REM/ on télécharge une page PHP avec 2 arguments (couleur : blanc, etat : on)		
+		aller/ FIN
+	Fin/ si	
+	SI/ "%etat%" = "off" alors:
+		telecharger/ http://%ip%/led.php?couleur=blanc&etat=off
+		REM/ on télécharge une page PHP avec 2 arguments (couleur : blanc, etat : off)		
+		aller/ FIN
+	Sinon:
+		Txt/
+		Txt/ Mauvais etat...
+		aller/ FIN
+	Fin/ si	
+Fin/ si
+
+SI/ "%led%" = "rouge" alors:
+	Txt/
+	Txt/ Selectionnez un etat [on/off] /#R
+	fix/ /q etat
+	REM/ on récupère ce que l'utilisateur a entré 
+	SI/ "%etat%" = "on" alors:
+		telecharger/ http://%ip%/led.php?couleur=rouge&etat=on
+		REM/ on télécharge une page PHP avec 2 arguments (couleur : rouge, etat : on)		
+		aller/ FIN
+	Fin/ si
+	SI/ "%etat%" = "off" alors:
+		telecharger/ http://%ip%/led.php?couleur=rouge&etat=off
+		REM/ on télécharge une page PHP avec 2 arguments (couleur : rouge, etat : off)		
+		aller/ FIN
+	Sinon:
+		Txt/
+		Txt/ Mauvais etat...
+		aller/ FIN
+	Fin/ si
+Sinon:
+	Txt/
+	Txt/ Mauvaise led...
+Fin/ si
+
+:FIN:
+REM/ Fin du programme
+txt/
